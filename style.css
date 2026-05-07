@@ -1,0 +1,667 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f5f5f5;
+}
+body {
+    padding-top: 110px; 
+}
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+    background: #c0392b;
+    color: white;
+    text-align: center;
+    padding: 12px;
+}
+
+/* Nav */
+nav {
+    position: fixed;
+    top: 50px; /* تحت الهيدر */
+    width: 100%;
+    z-index: 999;
+
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(5px);
+}
+/* Buttons */
+button {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #c0392b;
+    background: white;
+    color: #c0392b;
+    cursor: pointer;
+
+    box-shadow: 0 5px 0 #922b21;
+    transition: 0.2s;
+}
+
+button:hover {
+    color: gold;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(3px);
+}
+
+/* Sections */
+section {
+    display: none;
+    padding: 120px 20px 20px; 
+}
+
+section.active {
+    display: block;
+}
+/* Select */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+/* Doctor Cards */
+#doctorCards {
+    display: grid;
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    border: 2px solid #c0392b;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card h4 {
+    margin-bottom: 5px;
+}
+
+.card button {
+    margin-top: 10px;
+}
+
+/* CV Page */
+.cv {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #c0392b;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+/* Login */
+#loginPage::before {
+    background-image: url('https://images.unsplash.com/photo-1560807707-8cc77767d783');
+}
+
+/* Dashboard */
+#dashboard::before {
+    background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b');
+}
+
+/* Appointment */
+#appointment::before {
+    background-image: url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e');
+}
+
+/* Doctors */
+#doctors::before {
+    background-image: url('https://images.unsplash.com/photo-1576201836106-db1758fd1c97');
+}
+
+/* CV */
+#cvPage::before {
+    background-image: url('https://images.unsplash.com/photo-1558944351-c5d1b3a0f7b9');
+}
+
+/* Bookings */
+#myBookings::before {
+    background-image: url('https://images.unsplash.com/photo-1517849845537-4d257902454a');
+}
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(3px);
+    background: rgba(0,0,0,0.3);
+}
+
+/* النص */
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: white;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    font-size: 20px;
+}
+.contact iframe {
+    width: 80%;
+    height: 220px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.map {
+    width: 100%;
+    max-width: 300px;
+    height: 280px;
+    border: none;
+    border-radius: 15px;
+    display: block;
+    margin: 15px auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+#timeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.time-btn {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 2px solid #c0392b;
+    background: white;
+    color: #c0392b;
+    cursor: pointer;
+
+    transition: 0.2s;
+    box-shadow: 0 3px 0 #922b21;
+}
+
+.time-btn:hover {
+    transform: translateY(-2px);
+    color: gold;
+}
+
+.time-btn.selected {
+    background: #c0392b;
+    color: white;
+    transform: scale(1.05);
+}
+.toggle-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.info-box {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.4s ease;
+    background: white;
+    margin-top: 5px;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.info-box.show {
+    max-height: 300px;
+    padding: 10px;
+}
+#notification {
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+}
+.popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #27ae60;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+    z-index: 2000;
+}
+
+.notif-list {
+    position: fixed;
+    top: 50px;
+    right: 10px;
+    width: 250px;
+    background: white;
+    border: 2px solid #c0392b;
+    border-radius: 10px;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 2000;
+    padding: 10px;
+}
+
+.notif-item {
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    font-size: 14px;
+}
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    width: 280px;
+}
+
+.login-box input {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.login-contact {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #555;
+}
+#userIcon {
+    position: fixed;
+    top: 10px;
+    right: 50px;
+    font-size: 22px;
+    cursor: pointer;
+}
+body.login-mode nav,
+body.login-mode header {
+    display: none;
+}
+/* 🔥 Background لكل الصفحات */
+section {
+    position: relative;
+    min-height: 100vh;
+}
+
+/* طبقة الصورة */
+section::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+
+/* طبقة الـ blur */
+section::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,0.3);
+    z-index: -1;
+}
+/* ========================= */
+/* 🔥 Background System FIXED */
+/* ========================= */
+
+/* نخلي السكاشن تقبل الخلفية */
+section {
+    position: relative;
+    min-height: 100vh;
+}
+
+/* نطبق الخلفية على صفحات معينة بس (مش dashboard) */
+#loginPage::before,
+#appointment::before,
+#doctors::before,
+#cvPage::before,
+#myBookings::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+
+/* طبقة الـ blur */
+#loginPage::after,
+#appointment::after,
+#doctors::after,
+#cvPage::after,
+#myBookings::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,0.3);
+    z-index: -1;
+}
+
+#loginPage::before {
+    background-image: url('https://images.unsplash.com/photo-1560807707-8cc77767d783');
+}
+
+#appointment::before {
+    background-image: url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e');
+}
+
+#doctors::before {
+    background-image: url('https://images.unsplash.com/photo-1576201836106-db1758fd1c97');
+}
+
+#cvPage::before {
+    background-image: url('https://images.unsplash.com/photo-1558944351-c5d1b3a0f7b9');
+}
+
+#myBookings::before {
+    background-image: url('https://images.unsplash.com/photo-1517849845537-4d257902454a');
+}
+/* ========================= */
+/* 🔥 Background System FIXED */
+/* ========================= */
+
+/* نخلي السكاشن تقبل الخلفية */
+section {
+    position: relative;
+    min-height: 100vh;
+}
+
+/* الخلفيات (بدون dashboard) */
+#loginPage::before,
+#appointment::before,
+#doctors::before,
+#cvPage::before,
+#myBookings::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+
+/* البلور (برضه بدون dashboard) */
+#loginPage::after,
+#appointment::after,
+#doctors::after,
+#cvPage::after,
+#myBookings::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,0.3);
+    z-index: -1;
+}
+
+/* ========================= */
+/* 🎨 الصور */
+/* ========================= */
+
+#loginPage::before {
+    background-image: url('https://images.unsplash.com/photo-1560807707-8cc77767d783');
+}
+
+#appointment::before {
+    background-image: url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e');
+}
+
+#doctors::before {
+    background-image: url('https://images.unsplash.com/photo-1576201836106-db1758fd1c97');
+}
+
+#cvPage::before {
+    background-image: url('https://images.unsplash.com/photo-1558944351-c5d1b3a0f7b9');
+}
+
+#myBookings::before {
+    background-image: url('https://images.unsplash.com/photo-1517849845537-4d257902454a');
+}
+
+/* ========================= */
+/* ✅ FIX المشكلة */
+/* ========================= */
+
+/* نخلي الكونتاكت فوق البلور */
+.contact {
+    position: relative;
+    z-index: 5;
+}
+
+/* كل اللي جوه الكونتاكت يظهر */
+.contact * {
+    position: relative;
+    z-index: 5;
+}
+
+/* شكل احترافي (اختياري بس حلو 🔥) */
+.contact {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(6px);
+    border-radius: 15px;
+    padding: 15px;
+}
+.offer-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: white;
+    width: 320px;
+    max-width: 90%;
+
+    border-radius: 18px;
+    padding: 15px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+    z-index: 3000;
+
+    animation: slideUp 0.5s ease;
+
+    display: none;
+}
+
+.offer-content h4 {
+    margin: 0;
+    color: #c0392b;
+}
+
+.offer-content p {
+    margin-top: 8px;
+    font-size: 15px;
+}
+
+.close-offer {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+
+    cursor: pointer;
+    font-size: 14px;
+    color: #999;
+}
+
+.close-offer:hover {
+    color: red;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+/* ========================= */
+/* 📱 MOBILE RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+    body {
+        padding-top: 120px;
+        overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+        height: 55px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Icons */
+    #notification {
+        top: 15px;
+        right: 15px;
+        font-size: 20px;
+    }
+
+    #userIcon {
+        top: 15px;
+        right: 50px;
+        font-size: 20px;
+    }
+
+    /* Nav */
+    nav {
+        top: 55px;
+        padding: 8px 5px;
+        gap: 5px;
+    }
+
+    nav button {
+        flex: 1;
+        font-size: 12px;
+        padding: 8px 5px;
+    }
+
+    /* Sections */
+    section {
+        padding: 130px 15px 30px;
+    }
+
+    /* Hero */
+    .hero-text h1 {
+        font-size: 32px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    /* Login */
+    .login-box {
+        width: 90%;
+        max-width: 320px;
+        padding: 20px 15px;
+    }
+
+    .login-box input,
+    .login-box button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Cards */
+    .card {
+        padding: 12px;
+    }
+
+    /* Doctor buttons */
+    #timeContainer {
+        justify-content: center;
+    }
+
+    .time-btn {
+        flex: 1 1 40%;
+        text-align: center;
+    }
+
+    /* Contact */
+    .contact {
+        padding: 12px;
+    }
+
+    .map {
+        width: 100%;
+        height: 220px;
+    }
+
+    /* Popup */
+    .popup {
+        width: 80%;
+        right: 50%;
+        transform: translateX(50%);
+        text-align: center;
+    }
+
+    /* Notifications */
+    .notif-list {
+        width: 90%;
+        right: 5%;
+    }
+
+    /* Offer */
+    .offer-popup {
+        width: 90%;
+    }
+}

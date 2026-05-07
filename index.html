@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VetCare Clinic</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-mode">
+
+<header>
+     VetCare Clinic
+     <div id="notification" onclick="toggleNotifications()">🔔</div>
+     <div id="userIcon" onclick="toggleUser()">👤</div>
+</header>
+
+<!-- Popup -->
+<div id="popup" class="popup"></div>
+
+<!-- Popup User -->
+<div id="userBox" class="notif-list"></div>
+
+<!-- Notification List -->
+<div id="notifList" class="notif-list"></div>
+
+<nav>
+    <button onclick="showSection('dashboard')">Home</button>
+    <button onclick="showSection('appointment')">Book</button>
+    <button onclick="showSection('doctors')">Doctors</button>
+    <button onclick="showSection('pets')">Pets</button>
+    <button onclick="showSection('appointments')">Appointments</button>
+    <button onclick="showSection('medicalRecords')">Medical Records</button>
+    <button onclick="showSection('myBookings')">My Bookings</button>
+</nav>
+
+<!-- ✅ LOGIN ONLY ACTIVE -->
+<section id="loginPage" class="active">
+
+    <div class="login-hero">
+        <div class="overlay"></div>
+
+        <div class="login-box">
+            <h2>VetCare Login 🐾</h2>
+
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+
+            <button onclick="login()">Login</button>
+
+            <p>or</p>
+
+            <input type="email" id="signupEmail" placeholder="New Email">
+            <input type="number" id="signupAge" placeholder="Age">
+            <input type="password" id="signupPassword" placeholder="Password">
+
+            <button onclick="signup()">Create Account</button>
+
+            <div class="login-contact">
+                <p>📞 01012345678</p>
+                <p>📧 vetcare@gmail.com</p>
+                <p>📍Chelsea, London, UK</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- ❌ شيلنا active من هنا -->
+<section id="dashboard">
+
+    <div class="hero">
+        <div class="overlay"></div>
+
+        <div class="hero-text">
+            <h1> VetCare Clinic</h1>
+            <p>Your pet deserves the best care </p>
+        </div>
+    </div>
+
+    <div class="contact">
+        <h3>Contact Us</h3>
+
+        <button class="toggle-btn" onclick="toggleInfo('phoneInfo')">📞 Phone</button>
+        <div id="phoneInfo" class="info-box">
+            <a href="tel:01012345678">01012345678</a>
+        </div>
+
+        <button class="toggle-btn" onclick="toggleInfo('emailInfo')">📧 Email</button>
+        <div id="emailInfo" class="info-box">
+            <a href="mailto:vetcare@gmail.com">vetcare@gmail.com</a>
+        </div>
+
+        <button class="toggle-btn" onclick="toggleInfo('locationInfo')">📍 Location</button>
+        <div id="locationInfo" class="info-box">
+            <iframe 
+            src="https://maps.google.com/maps?q=51.4875,-0.1692&z=15&output=embed"
+            class="map"></iframe>
+        </div>
+    </div>
+
+</section>
+
+<section id="appointment">
+    <h3>Book Appointment</h3>
+
+    <label>Choose Doctor</label>
+    <select id="doctorSelect" onchange="updateTimes()"></select>
+
+    <label>Available Times</label>
+    <div id="timeContainer"></div>
+
+    <button onclick="confirmBooking()">Book Now</button>
+</section>
+
+<section id="doctors">
+    <h3>Our Doctors</h3>
+    <div id="doctorCards"></div>
+</section>
+
+<section id="pets">
+    <h3>Our Pets</h3>
+    <div class="pet-filters">
+        <button onclick="filterPets('all')">All Pets</button>
+        <button onclick="filterPets('dog')">Dogs</button>
+        <button onclick="filterPets('cat')">Cats</button>
+        <button onclick="filterPets('bird')">Birds</button>
+    </div>
+    <div id="petCards"></div>
+</section>
+
+<section id="appointments">
+    <h3>Appointments</h3>
+    <div class="appointment-filters">
+        <button onclick="filterAppointments('all')">All Appointments</button>
+        <button onclick="filterAppointments('scheduled')">Scheduled</button>
+        <button onclick="filterAppointments('completed')">Completed</button>
+        <button onclick="filterAppointments('cancelled')">Cancelled</button>
+    </div>
+    <div id="appointmentCards"></div>
+</section>
+
+<section id="medicalRecords">
+    <h3>Medical Records</h3>
+    <div class="record-filters">
+        <button onclick="filterRecords('all')">All Records</button>
+        <button onclick="filterRecords('diagnosis')">By Diagnosis</button>
+        <button onclick="filterRecords('treatment')">By Treatment</button>
+    </div>
+    <div id="recordCards"></div>
+</section>
+
+<section id="cvPage">
+    <button onclick="showSection('doctors')">⬅ Back</button>
+    <div id="cvContainer"></div>
+</section>
+
+<section id="myBookings">
+    <h3>My Bookings</h3>
+    <div id="bookingList"></div>
+</section>
+<div id="offerPopup" class="offer-popup">
+
+    <span class="close-offer" onclick="closeOffer()">✖</span>
+
+    <div class="offer-content">
+        <h4>🎉 Special Offer!</h4>
+        <p>Get <b>25% OFF</b> on your first visit 🐾</p>
+    </div>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+[
+  {
+    "vet_id":2,
+    "vet_name":"James Chavez",
+    "department_id":369
+  },
+  {
+    "vet_id":3,
+    "vet_name":"Alexis Haas",
+    "department_id":400
+  },
+  {
+    "vet_id":6,
+    "vet_name":"Julie Burke",
+    "department_id":240
+  },
+  {
+    "vet_id":7,
+    "vet_name":"Craig Gonzales",
+    "department_id":580
+  },
+  {
+    "vet_id":8,
+    "vet_name":"Katherine Rice",
+    "department_id":270
+  },
+  {
+    "vet_id":13,
+    "vet_name":"Joseph Lopez",
+    "department_id":680
+  },
+  {
+    "vet_id":14,
+    "vet_name":"Keith Oconnor",
+    "department_id":220
+  },
+  {
+    "vet_id":20,
+    "vet_name":"Kimberly Hansen",
+    "department_id":150
+  },
+  {
+    "vet_id":23,
+    "vet_name":"Mitchell Ross",
+    "department_id":789
+  },
+  {
+    "vet_id":25,
+    "vet_name":"Rachel Brown",
+    "department_id":584
+  },
+  {
+    "vet_id":28,
+    "vet_name":"Brenda Phelps",
+    "department_id":345
+  },
+  {
+    "vet_id":31,
+    "vet_name":"Anne Rivera",
+    "department_id":222
+  },
+  {
+    "vet_id":32,
+    "vet_name":"Jasmine Lopez",
+    "department_id":180
+  },
+  {
+    "vet_id":35,
+    "vet_name":"Jessica Collins",
+    "department_id":33
+  },
+  {
+    "vet_id":38,
+    "vet_name":"Jennifer Martinez",
+    "department_id":194
+  },
+  {
+    "vet_id":39,
+    "vet_name":"Shelley Pierce",
+    "department_id":930
+  }
+]
