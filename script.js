@@ -534,7 +534,7 @@ let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
 // Show section with admin-only restrictions
 function showSection(id) {
     // Check admin-only sections
-    const adminOnlySections = ['medicalRecords', 'appointments', 'myBookings'];
+    const adminOnlySections = ['medicalRecords', 'appointments', 'pets', 'myBookings'];
     
     if (adminOnlySections.includes(id) && !isAdmin) {
         showPopup("🔒 Admin access required to view this section");
