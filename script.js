@@ -820,3 +820,17 @@ function showOffer() {
 function closeOffer() {
     document.getElementById("offerPopup").style.display = "none";
 }
+
+window.onload = async function () {
+    await loadDepartmentsData();
+    await loadVetsData();
+    await loadOwnersData();
+    await loadPetsData();
+    await loadMedicalRecordsData();
+    await loadAppointmentsData();
+    loadDoctors();
+    renderDoctors();
+    renderBookings();
+
+    showSection("loginPage");
+};
