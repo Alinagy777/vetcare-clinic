@@ -1,17 +1,23 @@
 let currentUser = null;
 let isAdmin = false;
 
-// Admin credentials
-const ADMIN_EMAIL = 'ahmed@gmail.com';
-const ADMIN_PASSWORD = '1234';
+// Admin credentials - support multiple admins for cross-device access
+const ADMIN_EMAILS = ['ahmed@gmail.com', 'admin@vetcare.com', 'vetadmin@clinic.com'];
+const ADMIN_PASSWORDS = {
+    'ahmed@gmail.com': '1234',
+    'admin@vetcare.com': 'admin123',
+    'vetadmin@clinic.com': 'vetadmin'
+};
 
 // Check if current user is admin
 function checkAdminRole() {
-    if (currentUser && currentUser.email === ADMIN_EMAIL) {
+    if (currentUser && ADMIN_EMAILS.includes(currentUser.email)) {
         isAdmin = true;
+        console.log('Admin role confirmed for:', currentUser.email);
         return true;
     }
     isAdmin = false;
+    console.log('Admin role denied for:', currentUser ? currentUser.email : 'no user');
     return false;
 }
 
@@ -866,24 +872,46 @@ function login() {
         return;
     }
     
-    // Check if user exists in localStorage
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    let existingUser = users.find(u => u.email === email && u.password === password);
+    console.log('Login attempt:', { email, isAdminCandidate: ADMIN_EMAILS.includes(email) });
     
-    if (!existingUser) {
-        showPopup("Wrong email or password ❌");
-        return;
-    }
-    
-    currentUser = existingUser;
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    
-    // Check if user is admin
-    checkAdminRole();
-    
-    if (isAdmin) {
-        showPopup("Admin login successful!");
+    // Check if it's an admin account
+    if (ADMIN_EMAILS.includes(email) && ADMIN_PASSWORDS[email] === password) {
+        // Create admin user object if not exists
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let adminUser = users.find(u => u.email === email);
+        
+        if (!adminUser) {
+            adminUser = { email: email, password: password, role: 'admin' };
+            users.push(adminUser);
+            localStorage.setItem("users", JSON.stringify(users));
+        }
+        
+        currentUser = adminUser;
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        
+        // Check admin role
+        checkAdminRole();
+        
+        if (isAdmin) {
+            showPopup("Admin login successful!");
+            console.log('Admin logged in successfully:', email);
+        }
     } else {
+        // Check regular user
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let existingUser = users.find(u => u.email === email && u.password === password);
+        
+        if (!existingUser) {
+            showPopup("Wrong email or password ❌");
+            return;
+        }
+        
+        currentUser = existingUser;
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        
+        // Check admin role
+        checkAdminRole();
+        
         showPopup("Login successful!");
     }
     
