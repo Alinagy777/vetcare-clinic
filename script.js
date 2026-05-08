@@ -2,8 +2,8 @@ let currentUser = null;
 let isAdmin = false;
 
 // Admin credentials
-const ADMIN_EMAIL = 'admin@vetcare.com';
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_EMAIL = 'ahmed@gmail.com';
+const ADMIN_PASSWORD = '1234';
 
 // Check if current user is admin
 function checkAdminRole() {
