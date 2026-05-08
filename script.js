@@ -531,16 +531,17 @@ function generateAvailableTimes() {
 let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
 
+// Show section with admin-only restrictions
 function showSection(id) {
-
-    if (!currentUser && id !== "loginPage") {
-        id = "loginPage";
+    // Check admin-only sections
+    const adminOnlySections = ['medicalRecords', 'appointments', 'myBookings'];
+    
+    if (adminOnlySections.includes(id) && !isAdmin) {
+        showPopup("🔒 Admin access required to view this section");
+        return;
     }
-
-    document.querySelectorAll("section").forEach(sec => {
-        sec.classList.remove("active");
-    });
-
+    
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
 
     // login mode
