@@ -533,12 +533,14 @@ let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
 
 // Show section with admin-only restrictions
 function showSection(id) {
-    // Check admin-only sections
-    const adminOnlySections = ['medicalRecords', 'appointments', 'pets', 'myBookings'];
+    // Check admin-only sections (only restrict sensitive data)
+    const adminOnlySections = ['medicalRecords'];
     
-    if (adminOnlySections.includes(id) && !isAdmin) {
-        showPopup("🔒 Admin access required to view this section");
-        return;
+    if (adminOnlySections.includes(id)) {
+        if (!isAdmin) {
+            showPopup("🔒 Admin access required to view this section");
+            return;
+        }
     }
     
     document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
