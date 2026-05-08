@@ -42,9 +42,11 @@ function renderAppointments() {
         filteredAppointments = appointmentsData.filter(apt => apt.status === currentAppointmentFilter);
     }
     
-    filteredAppointments.forEach(appointment => {
+    filteredAppointments.forEach((appointment, index) => {
         let div = document.createElement("div");
         div.className = "card";
+        div.style.opacity = "0";
+        div.style.transform = "translateY(20px)";
         
         // Find pet and vet information
         const pet = petsData.find(p => p.pet_id === appointment.pet_id);
@@ -65,6 +67,12 @@ function renderAppointments() {
         `;
         
         container.appendChild(div);
+
+        setTimeout(() => {
+            div.style.transition = "all 0.5s ease";
+            div.style.opacity = "1";
+            div.style.transform = "translateY(0)";
+        }, index * 50);
     });
 }
 
@@ -163,9 +171,11 @@ function renderMedicalRecords() {
     if (currentRecordFilter === 'diagnosis') {
         // Group by diagnosis and show unique diagnoses
         let uniqueDiagnoses = [...new Set(medicalRecordsData.map(r => r.diagnosis))];
-        uniqueDiagnoses.forEach(diagnosis => {
+        uniqueDiagnoses.forEach((diagnosis, index) => {
             let div = document.createElement("div");
             div.className = "card";
+            div.style.opacity = "0";
+            div.style.transform = "translateY(20px)";
             const diagnosisEmoji = diagnosis === 'Infection' ? '🦠' : diagnosis === 'Vaccine' ? '💉' : '🏥';
             const count = medicalRecordsData.filter(r => r.diagnosis === diagnosis).length;
             
@@ -175,14 +185,22 @@ function renderMedicalRecords() {
                 <button onclick="showDiagnosisRecords('${diagnosis}')">View Records</button>
             `;
             container.appendChild(div);
+
+            setTimeout(() => {
+                div.style.transition = "all 0.5s ease";
+                div.style.opacity = "1";
+                div.style.transform = "translateY(0)";
+            }, index * 100);
         });
         return;
     } else if (currentRecordFilter === 'treatment') {
         // Group by treatment type
         let uniqueTreatments = [...new Set(medicalRecordsData.map(r => r.treatment || 'No treatment recorded'))];
-        uniqueTreatments.forEach(treatment => {
+        uniqueTreatments.forEach((treatment, index) => {
             let div = document.createElement("div");
             div.className = "card";
+            div.style.opacity = "0";
+            div.style.transform = "translateY(20px)";
             const count = medicalRecordsData.filter(r => (r.treatment || 'No treatment recorded') === treatment).length;
             const treatmentText = treatment.length > 30 ? treatment.substring(0, 30) + '...' : treatment;
             
@@ -192,14 +210,22 @@ function renderMedicalRecords() {
                 <button onclick="showTreatmentRecords('${treatment}')">View Records</button>
             `;
             container.appendChild(div);
+
+            setTimeout(() => {
+                div.style.transition = "all 0.5s ease";
+                div.style.opacity = "1";
+                div.style.transform = "translateY(0)";
+            }, index * 100);
         });
         return;
     }
     
     // Show all records
-    filteredRecords.forEach(record => {
+    filteredRecords.forEach((record, index) => {
         let div = document.createElement("div");
         div.className = "card";
+        div.style.opacity = "0";
+        div.style.transform = "translateY(20px)";
         
         const diagnosisEmoji = record.diagnosis === 'Infection' ? '🦠' : record.diagnosis === 'Vaccine' ? '💉' : '🏥';
         const treatmentText = record.treatment && record.treatment !== 'No treatment recorded' ? record.treatment.substring(0, 50) + '...' : 'No treatment recorded';
@@ -215,6 +241,12 @@ function renderMedicalRecords() {
         `;
         
         container.appendChild(div);
+
+        setTimeout(() => {
+            div.style.transition = "all 0.5s ease";
+            div.style.opacity = "1";
+            div.style.transform = "translateY(0)";
+        }, index * 30);
     });
 }
 
