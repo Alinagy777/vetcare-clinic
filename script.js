@@ -1,4 +1,19 @@
 let currentUser = null;
+let isAdmin = false;
+
+// Admin credentials
+const ADMIN_EMAIL = 'admin@vetcare.com';
+const ADMIN_PASSWORD = 'admin123';
+
+// Check if current user is admin
+function checkAdminRole() {
+    if (currentUser && currentUser.email === ADMIN_EMAIL) {
+        isAdmin = true;
+        return true;
+    }
+    isAdmin = false;
+    return false;
+}
 
 let doctors = [];
 let vetsData = [];
@@ -594,7 +609,8 @@ function confirmBooking() {
         doctor: docIndex,
         doctorName: doctors[docIndex].name,
         time: selected.innerText,
-        date: new Date().getTime()
+        date: new Date().getTime(),
+        userEmail: currentUser ? currentUser.email : 'guest'
     };
 
     bookings.push(booking);
@@ -627,18 +643,43 @@ function cancelBooking(index) {
     updateTimes();
 }
 
-// Render bookings
+// Render bookings with role-based access control
 function renderBookings() {
     let container = document.getElementById("bookingList");
     container.innerHTML = "";
 
-    bookings.forEach((b, index) => {
+    // Filter bookings based on user role
+    let bookingsToShow = [];
+    if (isAdmin) {
+        // Admin can see all bookings
+        bookingsToShow = bookings;
+    } else if (currentUser) {
+        // Regular users can only see their own bookings
+        bookingsToShow = bookings.filter(b => b.userEmail === currentUser.email);
+    }
+
+    if (bookingsToShow.length === 0) {
+        container.innerHTML = `
+            <div class="card">
+                <h3>${isAdmin ? 'No bookings found' : 'No bookings found. Book an appointment to see your bookings here!'}</h3>
+                <p>${isAdmin ? 'All user bookings will appear here' : 'Your bookings will appear here after you book an appointment'}</p>
+            </div>
+        `;
+        return;
+    }
+
+    bookingsToShow.forEach((b, index) => {
         let div = document.createElement("div");
         div.className = "card";
 
+        // Show user info for admin
+        let userInfo = isAdmin ? `<p><strong>User:</strong> ${b.userEmail || 'Unknown'}</p>` : '';
+        
         div.innerHTML = `
             <h4>${b.doctorName}</h4>
-            <p>Time: ${b.time}</p>
+            <p><strong>Time:</strong> ${b.time}</p>
+            <p><strong>Date:</strong> ${new Date(b.date).toLocaleDateString()}</p>
+            ${userInfo}
             <button onclick="cancelBooking(${index})">Cancel</button>
         `;
 
@@ -744,67 +785,48 @@ window.onload = async function () {
     renderDoctors();
     renderBookings();
 
+    // Check if user is already logged in and set admin role
+    let savedUser = localStorage.getItem("currentUser");
+    if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        checkAdminRole();
+    }
+
     showSection("loginPage"); // 👈 دايما يبدأ من اللوجين
 };
 function login() {
-
     let email = document.getElementById("loginEmail").value;
-    let pass = document.getElementById("loginPassword").value;
-
+    let password = document.getElementById("loginPassword").value;
+    
+    if (!email || !password) {
+        showPopup("Please fill in all fields");
+        return;
+    }
+    
+    // Check if user exists in localStorage
     let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    let user = users.find(
-        u => u.email === email && u.password === pass
-    );
-
-    if (!user) {
+    let existingUser = users.find(u => u.email === email && u.password === password);
+    
+    if (!existingUser) {
         showPopup("Wrong email or password ❌");
         return;
     }
-
-    currentUser = user;
-
-    localStorage.setItem(
-        "currentUser",
-        JSON.stringify(currentUser)
-    );
-
-    showPopup("Logged in ✅");
-
-    showSection("dashboard");
-}
-function signup() {
-
-    let email = document.getElementById("signupEmail").value;
-    let age = document.getElementById("signupAge").value;
-    let pass = document.getElementById("signupPassword").value;
-
-    if (!email || !age || !pass) {
-        showPopup("Fill all fields");
-        return;
+    
+    currentUser = existingUser;
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    
+    // Check if user is admin
+    checkAdminRole();
+    
+    if (isAdmin) {
+        showPopup("Admin login successful!");
+    } else {
+        showPopup("Login successful!");
     }
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    // تحقق لو الإيميل موجود
-    let exists = users.find(u => u.email === email);
-
-    if (exists) {
-        showPopup("Email already exists");
-        return;
-    }
-
-    let user = {
-        email: email,
-        age: age,
-        password: pass
-    };
-
-    users.push(user);
-
-    localStorage.setItem("users", JSON.stringify(users));
-
-    showPopup("Account created ✅");
+    
+    setTimeout(() => {
+        showSection("dashboard");
+    }, 1000);
 }
 
 // User box
@@ -819,8 +841,11 @@ function toggleUser() {
     if (!currentUser) {
         box.innerHTML = `<p>Not logged in</p>`;
     } else {
+        let roleBadge = isAdmin ? '<span style="background: #ff6ec7; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem;">👑 ADMIN</span>' : '<span style="background: #00d4ff; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem;">👤 USER</span>';
+        
         box.innerHTML = `
             <p>${currentUser.email}</p>
+            <p>${roleBadge}</p>
             <p>Logged in ✅</p>
             <button onclick="logout()">Logout</button>
         `;
@@ -829,8 +854,8 @@ function toggleUser() {
     box.style.display = "block";
 }
 function logout() {
-
     currentUser = null;
+    isAdmin = false;
 
     localStorage.removeItem("currentUser");
 
