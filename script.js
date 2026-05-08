@@ -415,10 +415,10 @@ function renderPets() {
         const animalEmoji = pet.animal_type === 'dog' ? '🐕' : pet.animal_type === 'cat' ? '🐈' : '🦜';
         
         div.innerHTML = `
-            <h4>${animalEmoji} ${pet.pet_name}</h4>
-            <p>Type: ${pet.animal_type}</p>
-            <p>Age: ${pet.age} years</p>
-            <p>${ownerStatus}</p>
+            <h4 class="pop-up-text">${animalEmoji} ${pet.pet_name}</h4>
+            <p class="pop-up-text">Type: ${pet.animal_type}</p>
+            <p class="pop-up-text">Age: ${pet.age} years</p>
+            <p class="pop-up-text">${ownerStatus}</p>
             <button onclick="viewPetDetails(${pet.pet_id})">View Details</button>
         `;
         
@@ -692,8 +692,8 @@ function renderDoctors() {
         div.style.transform = "translateY(20px)";
 
         div.innerHTML = `
-            <h4>${doc.name}</h4>
-            <p>${doc.specialization}</p>
+            <h4 class="pop-up-text">${doc.name}</h4>
+            <p class="pop-up-text">${doc.specialization}</p>
             <button onclick="openCV(${index})">View CV</button>
         `;
 
