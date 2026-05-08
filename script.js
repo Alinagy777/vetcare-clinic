@@ -887,9 +887,39 @@ function login() {
         showPopup("Login successful!");
     }
     
+    // Update navigation based on role
+    updateNavigationVisibility();
+    
     setTimeout(() => {
         showSection("dashboard");
     }, 1000);
+}
+
+// Update navigation visibility based on user role
+function updateNavigationVisibility() {
+    console.log('Updating navigation visibility, isAdmin:', isAdmin);
+    
+    // Hide admin-only buttons for regular users
+    const adminOnlyButtons = ['petsBtn', 'appointmentsBtn', 'medicalRecordsBtn'];
+    
+    adminOnlyButtons.forEach(btnId => {
+        const btn = document.getElementById(btnId);
+        if (btn) {
+            btn.style.display = isAdmin ? 'inline-block' : 'none';
+            console.log(`Button ${btnId} visibility:`, isAdmin ? 'visible' : 'hidden');
+        } else {
+            console.log(`Button ${btnId} not found`);
+        }
+    });
+    
+    // Show user-accessible buttons for all users
+    const userButtons = ['dashboard', 'appointment', 'doctors', 'myBookings'];
+    userButtons.forEach(sectionId => {
+        const btn = document.querySelector(`button[onclick*="${sectionId}"]`);
+        if (btn) {
+            btn.style.display = 'inline-block';
+        }
+    });
 }
 
 // User box
