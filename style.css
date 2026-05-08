@@ -43,26 +43,65 @@ button {
     cursor: pointer;
 
     box-shadow: 0 5px 0 #922b21;
-    transition: 0.2s;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
 }
 
 button:hover {
     color: gold;
     transform: translateY(-2px);
+    box-shadow: 0 7px 0 #922b21;
+}
+
+button:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 button:active {
-    transform: translateY(3px);
+    transform: translateY(0);
+    box-shadow: 0 3px 0 #922b21;
 }
 
 /* Sections */
 section {
     display: none;
     padding: 120px 20px 20px; 
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
 }
 
 section.active {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 /* Select */
 select {
@@ -85,6 +124,30 @@ select {
     border: 2px solid #c0392b;
 
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border-color: #e74c3c;
 }
 
 .card h4 {
@@ -191,19 +254,47 @@ select {
     color: #c0392b;
     cursor: pointer;
 
-    transition: 0.2s;
+    transition: all 0.3s ease;
     box-shadow: 0 3px 0 #922b21;
+    position: relative;
+    overflow: hidden;
+}
+
+.time-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
 }
 
 .time-btn:hover {
     transform: translateY(-2px);
     color: gold;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.time-btn:hover::before {
+    width: 100px;
+    height: 100px;
 }
 
 .time-btn.selected {
     background: #c0392b;
     color: white;
     transform: scale(1.05);
+    animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1.05); }
 }
 .toggle-btn {
     width: 100%;

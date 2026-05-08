@@ -373,9 +373,11 @@ function renderPets() {
         ? petsData 
         : petsData.filter(pet => pet.animal_type === currentPetFilter);
     
-    filteredPets.forEach(pet => {
+    filteredPets.forEach((pet, index) => {
         let div = document.createElement("div");
         div.className = "card";
+        div.style.opacity = "0";
+        div.style.transform = "translateY(20px)";
         
         const ownerStatus = pet.owner_id ? `Owner ID: ${pet.owner_id}` : 'Available for adoption';
         const animalEmoji = pet.animal_type === 'dog' ? '🐕' : pet.animal_type === 'cat' ? '🐈' : '🦜';
@@ -389,6 +391,12 @@ function renderPets() {
         `;
         
         container.appendChild(div);
+
+        setTimeout(() => {
+            div.style.transition = "all 0.5s ease";
+            div.style.opacity = "1";
+            div.style.transform = "translateY(0)";
+        }, index * 50);
     });
 }
 
@@ -648,6 +656,8 @@ function renderDoctors() {
     doctors.forEach((doc, index) => {
         let div = document.createElement("div");
         div.className = "card";
+        div.style.opacity = "0";
+        div.style.transform = "translateY(20px)";
 
         div.innerHTML = `
             <h4>${doc.name}</h4>
@@ -656,6 +666,12 @@ function renderDoctors() {
         `;
 
         container.appendChild(div);
+
+        setTimeout(() => {
+            div.style.transition = "all 0.5s ease";
+            div.style.opacity = "1";
+            div.style.transform = "translateY(0)";
+        }, index * 100);
     });
 }
 
