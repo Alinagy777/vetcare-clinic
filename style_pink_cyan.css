@@ -8,7 +8,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #ff6ec7 0%, #00d4ff 100%);
     min-height: 100vh;
-    padding-top: 110px;
+    padding-top: 150px;
     line-height: 1.6;
     position: relative;
     overflow-x: hidden;
@@ -29,6 +29,7 @@ body::before {
 header {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 1000;
     background: linear-gradient(135deg, #ff6ec7 0%, #00d4ff 100%);
@@ -39,7 +40,6 @@ header {
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 2px;
-    position: relative;
     overflow: hidden;
 }
 
@@ -87,7 +87,8 @@ header #notification:hover, header #userIcon:hover {
 
 nav {
     position: fixed;
-    top: 80px;
+    top: 70px;
+    left: 0;
     width: 100%;
     z-index: 999;
     display: flex;
@@ -152,7 +153,7 @@ nav button:active {
 
 section {
     display: none;
-    padding: 120px 20px 20px; 
+    padding: 20px; 
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.5s ease;
