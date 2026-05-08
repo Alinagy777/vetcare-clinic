@@ -533,28 +533,42 @@ let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
 
 // Show section with admin-only restrictions
 function showSection(id) {
+    console.log('=== SHOW SECTION DEBUG ===');
     console.log('showSection called with id:', id);
+    console.log('Current isAdmin:', isAdmin);
+    console.log('Current user:', currentUser ? currentUser.email : 'none');
+    
+    // Force admin role check
+    checkAdminRole();
+    console.log('After checkAdminRole - isAdmin:', isAdmin);
     
     // Check admin-only sections (restrict sensitive data and admin features)
     const adminOnlySections = ['medicalRecords', 'pets', 'appointments'];
+    console.log('Admin-only sections:', adminOnlySections);
+    console.log('Is requested section admin-only?', adminOnlySections.includes(id));
     
     if (adminOnlySections.includes(id)) {
         if (!isAdmin) {
+            console.log('ACCESS DENIED - User tried to access admin-only section:', id);
             showPopup("🔒 Admin access required to view this section");
-            console.log('Access denied: User tried to access admin-only section:', id);
             return;
+        } else {
+            console.log('ACCESS GRANTED - Admin accessing admin-only section:', id);
         }
+    } else {
+        console.log('ACCESS GRANTED - User accessing regular section:', id);
     }
     
-    console.log('Access granted for section:', id);
+    console.log('Switching to section:', id);
     document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
     
     const targetSection = document.getElementById(id);
     if (targetSection) {
         targetSection.classList.add("active");
-        console.log('Section activated:', id);
+        console.log('Section activated successfully:', id);
     } else {
         console.error('Section not found:', id);
+        return;
     }
 
     // login mode
@@ -566,6 +580,7 @@ function showSection(id) {
 
     // 🔥 تشغيل الإعلان
     showOffer();
+    console.log('=== END SHOW SECTION DEBUG ===');
 }
 // Doctors dropdown
 function loadDoctors() {
