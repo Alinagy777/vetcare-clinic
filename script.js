@@ -736,10 +736,25 @@ function toggleNotifications() {
 
 // Doctors cards
 function renderDoctors() {
+    console.log('renderDoctors called, doctors array length:', doctors.length);
+    console.log('doctors data:', doctors);
+    
     let container = document.getElementById("doctorCards");
+    if (!container) {
+        console.log('doctorCards container not found!');
+        return;
+    }
+    
     container.innerHTML = "";
 
+    if (doctors.length === 0) {
+        container.innerHTML = '<div class="card"><h3>No doctors available</h3></div>';
+        console.log('No doctors to display');
+        return;
+    }
+
     doctors.forEach((doc, index) => {
+        console.log('Rendering doctor:', doc);
         let div = document.createElement("div");
         div.className = "card";
         div.style.opacity = "0";
@@ -759,21 +774,40 @@ function renderDoctors() {
             div.style.transform = "translateY(0)";
         }, index * 100);
     });
+    
+    console.log('renderDoctors completed');
 }
 
 // CV
 function openCV(index) {
+    console.log('openCV called with index:', index);
+    console.log('doctors array length:', doctors.length);
+    
+    if (!doctors[index]) {
+        console.error('Doctor not found at index:', index);
+        return;
+    }
+    
     let doc = doctors[index];
+    console.log('Opening CV for doctor:', doc);
 
-    document.getElementById("cvContainer").innerHTML = `
+    let cvContainer = document.getElementById("cvContainer");
+    if (!cvContainer) {
+        console.error('cvContainer not found!');
+        return;
+    }
+
+    cvContainer.innerHTML = `
         <div class="cv">
             <h2>${doc.name}</h2>
             <p>Specialization: ${doc.specialization}</p>
             <p>Age: ${doc.age}</p>
             <p>Experience: ${doc.experience}</p>
+            <button onclick="showSection('doctors')">⬅ Back to Doctors</button>
         </div>
     `;
 
+    console.log('CV content set, switching to cvPage');
     showSection("cvPage");
 }
 
