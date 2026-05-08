@@ -535,12 +535,13 @@ let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
 function showSection(id) {
     console.log('showSection called with id:', id);
     
-    // Check admin-only sections (only restrict sensitive data)
-    const adminOnlySections = ['medicalRecords'];
+    // Check admin-only sections (restrict sensitive data and admin features)
+    const adminOnlySections = ['medicalRecords', 'pets', 'appointments'];
     
     if (adminOnlySections.includes(id)) {
         if (!isAdmin) {
             showPopup("🔒 Admin access required to view this section");
+            console.log('Access denied: User tried to access admin-only section:', id);
             return;
         }
     }
