@@ -533,6 +533,8 @@ let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
 
 // Show section with admin-only restrictions
 function showSection(id) {
+    console.log('showSection called with id:', id);
+    
     // Check admin-only sections (only restrict sensitive data)
     const adminOnlySections = ['medicalRecords'];
     
@@ -543,8 +545,16 @@ function showSection(id) {
         }
     }
     
+    console.log('Access granted for section:', id);
     document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+    
+    const targetSection = document.getElementById(id);
+    if (targetSection) {
+        targetSection.classList.add("active");
+        console.log('Section activated:', id);
+    } else {
+        console.error('Section not found:', id);
+    }
 
     // login mode
     if (id === "loginPage") {
