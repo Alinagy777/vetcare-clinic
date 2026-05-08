@@ -36,7 +36,7 @@ header {
     background: linear-gradient(135deg, #ff6ec7 0%, #00d4ff 100%);
     color: white;
     text-align: center;
-    padding: 15px;
+    padding: 0;
     box-shadow: 0 4px 20px rgba(255, 110, 199, 0.3);
     font-size: 1.8rem;
     font-weight: 700;
@@ -46,6 +46,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
+    border: 0;
 }
 
 header::before {
@@ -99,7 +101,7 @@ nav {
     z-index: 999 !important;
     display: flex;
     justify-content: center;
-    padding: 12px 15px;
+    padding: 0 15px;
     background: rgba(255,255,255,0.95);
     backdrop-filter: blur(20px);
     box-shadow: 0 4px 20px rgba(255, 110, 199, 0.2);
@@ -109,6 +111,9 @@ nav {
     will-change: transform;
     height: 60px;
     align-items: center;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
 }
 
 nav button {
